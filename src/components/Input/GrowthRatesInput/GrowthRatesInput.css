@@ -1,0 +1,36 @@
+.growth-rate-controls {
+  margin: 15px;
+}
+
+.growth-rate-controls button {
+  margin: 15px;
+}
+
+.growth-rate-definitions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px solid #929292;
+  padding: 5px;
+}
+
+.growth-rate-fields {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.growth-rate-fields div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.growth-rate-fields div * {
+  margin: 5px 10px;
+  width: 25px;
+}
+
+.growth-rate-fields div button,
+.growth-rate-fields select {
+  width: auto;
+}
