@@ -10,7 +10,7 @@
         "END": 0.1,
         "DEF": 0.1,
         "INT": 0.1,
-        "WILL": 0.1,
+        "SPI": 0.1,
         "MDF": 0.1,
         "SPD": 0.1,
         "LCK": 0.1,
@@ -40,7 +40,7 @@
       },
       "modifiers": {
         "INT": 0.25,
-        "WILL": 0.25
+        "SPI": 0.25
       }
     },
     "Scout": {
@@ -84,7 +84,7 @@
         "END": 0.1
       }
     },
-    "Elemental Mage": {
+    "ElementalMage": {
       "name": "Elemental Mage",
       "description": "Offensive elemental magic.",
       "tier": 2,
@@ -98,7 +98,7 @@
         "MDF": 0.1
       }
     },
-    "Light Mage": {
+    "LightMage": {
       "name": "Light Mage",
       "description": "Healing magic, buffs, and status condition cures.",
       "tier": 2,
@@ -107,12 +107,12 @@
         "prerequisites": ["Magician"]
       },
       "modifiers": {
-        "WILL": 0.35,
+        "SPI": 0.35,
         "MDF": 0.25,
         "LCK": 0.1
       }
     },
-    "Dark Mage": {
+    "DarkMage": {
       "name": "Dark Mage",
       "description": "Offensive dark magic, debuffs, and status conditions.",
       "tier": 2,
@@ -179,12 +179,12 @@
       },
       "modifiers": {
         "MDF": 0.5,
-        "WILL": 0.5,
+        "SPI": 0.5,
         "DEF": 0.25,
         "STR": -0.15
       }
     },
-    "Dread Knight": {
+    "DreadKnight": {
       "name": "Dread Knight",
       "description": "Mixes defensive and dark magic. Gains abilities to debuff enemies and inflict status conditions.",
       "tier": 3,
@@ -214,7 +214,7 @@
         "MDF": -0.15
       }
     },
-    "Battle Dancer": {
+    "BattleDancer": {
       "name": "Battle Dancer",
       "description": "Agile, critical-hit-focused melee fighter.",
       "tier": 3,
@@ -254,7 +254,7 @@
       },
       "modifiers": {
         "INT": 0.5,
-        "WILL": 0.5,
+        "SPI": 0.5,
         "ACC": 0.25,
         "END": -0.15
       }
@@ -283,7 +283,7 @@
         "prerequisites": ["Light Mage"]
       },
       "modifiers": {
-        "WILL": 0.5,
+        "SPI": 0.5,
         "INT": 0.5,
         "LCK": 0.25,
         "STR": -0.15
@@ -360,7 +360,7 @@
       "modifiers": {
         "SPD": 0.5,
         "LCK": 0.5,
-        "WILL": 0.25,
+        "SPI": 0.25,
         "ACC": -0.15
       }
     }

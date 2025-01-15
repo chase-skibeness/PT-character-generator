@@ -19,7 +19,7 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
 
   function setBaseStat(stat, newStatValue) {
     let newStats = { ...baseStats };
-    newStats[stat] = newStatValue;
+    newStats[stat] = parseInt(newStatValue);
     setBaseStats(newStats);
   }
 
@@ -43,10 +43,6 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
     <div className="base-stats-container">
       <div className="base-stats-controls">
         <h2>Base Stats</h2>
-        <div className="base-stats-definitions">
-          {race === '' ? <small>Please select a race</small> : null}
-        </div>
-
         <button onClick={generateAllStats} disabled={race === ''}>
           Generate All
         </button>

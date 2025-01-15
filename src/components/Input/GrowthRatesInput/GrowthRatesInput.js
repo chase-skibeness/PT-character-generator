@@ -6,31 +6,31 @@ const GROWTH_RATES = {
     name: 'Minimal',
     probability: 0.05,
     description: '+1 every 3 levels',
-    impact: 0.334,
+    calcGrowth: (level) => (level % 3 ? 1 : 0),
   },
   Steady: {
     name: 'Steady',
     probability: 0.2,
     description: '+1 every 2 levels',
-    impact: 0.5,
+    calcGrowth: (level) => (level % 2 ? 1 : 0),
   },
   Gradual: {
     name: 'Gradual',
     probability: 0.5,
     description: '+1 every level',
-    impact: 1.0,
+    calcGrowth: () => 1,
   },
   Accelerated: {
     name: 'Accelerated',
     probability: 0.2,
     description: '+1 every level, bonus +1 every 3 levels',
-    impact: 1.334,
+    calcGrowth: (level) => (level % 3 ? 2 : 1),
   },
   Exceptional: {
     name: 'Exceptional',
     probability: 0.05,
     description: '2 every level',
-    impact: 2.0,
+    calcGrowth: () => 2,
   },
 };
 
