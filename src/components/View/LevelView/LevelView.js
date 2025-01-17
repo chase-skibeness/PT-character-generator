@@ -9,8 +9,8 @@ const LevelView = ({ level, classDef, stats }) => {
       <div className="level-view-stats-container">
         {stats != null
           ? Object.keys(stats).map((stat) => (
-              <p key={`statdisplay${stat}key`}>
-                <span>{stat}:</span> {stats[stat]}
+              <p key={`statdisplay${stat}${level}key`}>
+                <span>{stat}:</span> {stats[stat].value}
               </p>
             ))
           : null}

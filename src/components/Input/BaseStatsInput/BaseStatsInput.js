@@ -19,14 +19,14 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
 
   function setBaseStat(stat, newStatValue) {
     let newStats = { ...baseStats };
-    newStats[stat] = parseInt(newStatValue);
+    newStats[stat] = { value: parseInt(newStatValue), overflow: 0 };
     setBaseStats(newStats);
   }
 
   function generateAllStats() {
     let newStats = { ...baseStats };
     Object.keys(newStats).map((stat) => {
-      newStats[stat] = getRandomBaseStat(stat);
+      newStats[stat] = { value: getRandomBaseStat(stat), overflow: 0 };
     });
     setBaseStats(newStats);
   }
@@ -60,7 +60,7 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
               type="number"
               min={racialBaseStats ? racialBaseStats[stat]?.min : 0}
               max={racialBaseStats ? racialBaseStats[stat]?.max : 0}
-              value={baseStats[stat] || ''}
+              value={baseStats[stat].value || ''}
               onChange={(e) => setBaseStat(stat, e.target.value)}
               placeholder={
                 racialBaseStats

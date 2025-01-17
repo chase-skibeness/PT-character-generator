@@ -4,30 +4,42 @@ import './GrowthRatesInput.css';
 const GROWTH_RATES = {
   Minimal: {
     name: 'Minimal',
+    code: '--',
     probability: 0.05,
     description: '+1 every 3 levels',
-    calcGrowth: (level) => (level % 3 ? 1 : 0),
+    calcGrowth: (level) => (level % 3 === 0 ? 1 : 0),
   },
   Steady: {
     name: 'Steady',
+    code: '-',
     probability: 0.2,
     description: '+1 every 2 levels',
-    calcGrowth: (level) => (level % 2 ? 1 : 0),
+    calcGrowth: (level) => (level % 2 === 0 ? 1 : 0),
   },
-  Gradual: {
-    name: 'Gradual',
+  Normal: {
+    name: 'Normal',
+    code: '_',
     probability: 0.5,
     description: '+1 every level',
     calcGrowth: () => 1,
   },
+  Gradual: {
+    name: 'Gradual',
+    code: '+',
+    probability: 0.1,
+    description: '+1 every level, bonus +1 every 3 levels',
+    calcGrowth: (level) => (level % 3 == 0 ? 2 : 1),
+  },
   Accelerated: {
     name: 'Accelerated',
+    code: '++',
     probability: 0.2,
-    description: '+1 every level, bonus +1 every 3 levels',
-    calcGrowth: (level) => (level % 3 ? 2 : 1),
+    description: '+1 every level, bonus +1 every 2 levels',
+    calcGrowth: (level) => (level % 2 === 0 ? 2 : 1),
   },
   Exceptional: {
     name: 'Exceptional',
+    code: '*',
     probability: 0.05,
     description: '2 every level',
     calcGrowth: () => 2,
@@ -84,12 +96,12 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
         <h2>Natural Growth Rates</h2>
         <div className="growth-rate-definitions">
           {Object.keys(GROWTH_RATES).map((growthRateName) => (
-            <small
-              key={`${growthRateName}: ${GROWTH_RATES[growthRateName].description}Key`}
+            <div
+              key={`${GROWTH_RATES[growthRateName].name}: ${GROWTH_RATES[growthRateName].description}Key`}
             >
-              <strong>{`${growthRateName}:`}</strong>
-              {` ${GROWTH_RATES[growthRateName].description}`}
-            </small>
+              <strong>{`${GROWTH_RATES[growthRateName].code}:`}</strong>
+              <details>{` ${GROWTH_RATES[growthRateName].description}`}</details>
+            </div>
           ))}
         </div>
         <button onClick={generateAllGrowthRates}>Generate All</button>
@@ -110,9 +122,8 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
                 <option
                   key={`growthRateOption${growthRateName}`}
                   value={growthRateName}
-                  title={growthRates[statName]?.description || ''}
                 >
-                  {growthRateName}
+                  {GROWTH_RATES[growthRateName].code}
                 </option>
               ))}
             </select>
