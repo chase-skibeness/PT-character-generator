@@ -22,7 +22,7 @@ const raceCollection = createListCollection({
 
 const RaceInput = ({ race, setRace }) => {
   return (
-    <Card.Root>
+    <Card.Root maxH="142px">
       <Card.Header>
         <Heading>Select a Race</Heading>
       </Card.Header>
@@ -33,6 +33,7 @@ const RaceInput = ({ race, setRace }) => {
           onValueChange={(e) => {
             setRace(races[e.value[0]]);
           }}
+          positioning={{ strategy: 'fixed' }}
         >
           <SelectLabel>{race.description}</SelectLabel>
           <SelectTrigger>

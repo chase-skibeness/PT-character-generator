@@ -10,8 +10,10 @@ import {
   Field,
   SimpleGrid,
   GridItem,
+  IconButton,
 } from '@chakra-ui/react';
 import React from 'react';
+import { BsArrowClockwise } from 'react-icons/bs';
 //import './BaseStatsInput.css';
 
 const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
@@ -90,13 +92,13 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
                       }
                     />
                   </NumberInput.Root>
-                  <Button
+                  <IconButton
                     key={`${stat}Generator`}
                     onClick={() => generateStat(stat)}
                     disabled={race === ''}
                   >
-                    Generate
-                  </Button>
+                    <BsArrowClockwise />
+                  </IconButton>
                 </Group>
               </Field.Root>
             </GridItem>
@@ -105,10 +107,12 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
       </Card.Body>
       <Card.Footer justifyContent="flex-end">
         <Group>
-          <Button onClick={generateAllStats} disabled={race === ''}>
-            Generate All
+          <Button onClick={generateAllStats} disabled={race === ''} size="sm">
+            <BsArrowClockwise /> All
           </Button>
-          <Button onClick={clearAllStats}>Clear</Button>
+          <Button onClick={clearAllStats} size="sm">
+            Clear
+          </Button>
         </Group>
       </Card.Footer>
     </Card.Root>
