@@ -1,5 +1,6 @@
+import { Box } from '@chakra-ui/react';
 import React from 'react';
-import './GrowthRatesInput.css';
+//import './GrowthRatesInput.css';
 
 const GROWTH_RATES = {
   Minimal: {
@@ -91,7 +92,7 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
   }
 
   return (
-    <div className="growth-rate-container">
+    <Box>
       <div className="growth-rate-controls">
         <h2>Natural Growth Rates</h2>
         <div className="growth-rate-definitions">
@@ -136,7 +137,7 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
           </div>
         ))}
       </div>
-    </div>
+    </Box>
   );
 };
 

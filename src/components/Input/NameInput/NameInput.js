@@ -1,16 +1,21 @@
+import { Card, Heading, Input } from '@chakra-ui/react';
 import React from 'react';
 
 const NameInput = ({ name, setName }) => {
   return (
-    <div>
-      <h2>Character Name</h2>
-      <input
-        id="nameInput"
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-    </div>
+    <Card.Root>
+      <Card.Header>
+        <Heading>Character Name</Heading>
+      </Card.Header>
+      <Card.Body>
+        <Input
+          id="nameInput"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Card.Body>
+    </Card.Root>
   );
 };
 
