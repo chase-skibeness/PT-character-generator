@@ -61,7 +61,7 @@
       "description": "Tanky defense and endurance.",
       "tier": 2,
       "requirements": {
-        "level": 20,
+        "level": 25,
         "prerequisites": ["Warrior"]
       },
       "modifiers": {
@@ -75,7 +75,7 @@
       "description": "High physical damage output.",
       "tier": 2,
       "requirements": {
-        "level": 20,
+        "level": 25,
         "prerequisites": ["Warrior"]
       },
       "modifiers": {
@@ -89,7 +89,7 @@
       "description": "Offensive elemental magic.",
       "tier": 2,
       "requirements": {
-        "level": 20,
+        "level": 25,
         "prerequisites": ["Magician"]
       },
       "modifiers": {
@@ -103,7 +103,7 @@
       "description": "Healing magic, buffs, and status condition cures.",
       "tier": 2,
       "requirements": {
-        "level": 20,
+        "level": 25,
         "prerequisites": ["Magician"]
       },
       "modifiers": {
@@ -117,7 +117,7 @@
       "description": "Offensive dark magic, debuffs, and status conditions.",
       "tier": 2,
       "requirements": {
-        "level": 20,
+        "level": 25,
         "prerequisites": ["Magician"]
       },
       "modifiers": {
@@ -131,7 +131,7 @@
       "description": "High damage but low accuracy abilities.",
       "tier": 2,
       "requirements": {
-        "level": 20,
+        "level": 25,
         "prerequisites": ["Scout"]
       },
       "modifiers": {
@@ -145,7 +145,7 @@
       "description": "Excels in exploration and resource gathering.",
       "tier": 2,
       "requirements": {
-        "level": 20,
+        "level": 25,
         "prerequisites": ["Scout"]
       },
       "modifiers": {
