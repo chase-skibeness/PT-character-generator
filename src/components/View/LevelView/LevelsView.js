@@ -3,7 +3,19 @@ import { Table } from '@chakra-ui/react';
 import LevelControls from '../LevelControls/LevelControls';
 import { ActionBarRoot, ActionBarContent } from '../../ui/action-bar';
 
-const LevelsView = ({ levelList, addLevel }) => {
+const statList = [
+  'STR',
+  'END',
+  'DEF',
+  'INT',
+  'SPI',
+  'MDF',
+  'SPD',
+  'LCK',
+  'ACC',
+];
+
+const LevelsView = ({ levelList, addLevel, growthRates }) => {
   return (
     <>
       <Table.Root stickyHeader striped>
@@ -11,15 +23,11 @@ const LevelsView = ({ levelList, addLevel }) => {
           <Table.Row>
             <Table.ColumnHeader>Level</Table.ColumnHeader>
             <Table.ColumnHeader>Class</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>STR</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>END</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>DEF</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>INT</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>SPI</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>MDF</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>SPD</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>LCK</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign={'end'}>ACC</Table.ColumnHeader>
+            {statList.map((stat) => (
+              <Table.ColumnHeader key={`${stat}header`} textAlign={'center'}>
+                {stat}: {growthRates[stat]?.code}
+              </Table.ColumnHeader>
+            ))}
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -27,33 +35,14 @@ const LevelsView = ({ levelList, addLevel }) => {
             <Table.Row key={characterAtLevel.level}>
               <Table.Cell>{characterAtLevel.level}</Table.Cell>
               <Table.Cell>{characterAtLevel.classDef?.name}</Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.STR.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.END.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.DEF.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.INT.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.SPI.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.MDF.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.SPD.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.LCK.value}
-              </Table.Cell>
-              <Table.Cell textAlign={'end'}>
-                {characterAtLevel.stats.ACC.value}
-              </Table.Cell>
+              {statList.map((stat) => (
+                <Table.Cell
+                  key={`${characterAtLevel.level}${stat}Cellkey`}
+                  textAlign={'center'}
+                >
+                  {characterAtLevel.stats[stat].value}
+                </Table.Cell>
+              ))}
             </Table.Row>
           ))}
         </Table.Body>

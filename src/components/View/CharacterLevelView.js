@@ -89,7 +89,11 @@ const CharacterLevelView = ({ name, baseStats, growthRates }) => {
         </Heading>
       </Card.Header>
       <Card.Body>
-        <LevelsView levelList={levelList} addLevel={addLevel} />
+        <LevelsView
+          levelList={levelList}
+          addLevel={addLevel}
+          growthRates={growthRates}
+        />
       </Card.Body>
       <Card.Footer>
         <br />
