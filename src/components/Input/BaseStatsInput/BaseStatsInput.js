@@ -1,20 +1,17 @@
 import {
   Badge,
-  Button,
   Card,
   Group,
   Heading,
-  HStack,
-  NumberInput,
-  Stack,
-  Field,
   SimpleGrid,
   GridItem,
   IconButton,
 } from '@chakra-ui/react';
+import { Button } from '../../ui/button';
+import { NumberInputField, NumberInputRoot } from '../../ui/number-input';
+import { Field } from '../../ui/field';
 import React from 'react';
 import { BsArrowClockwise } from 'react-icons/bs';
-//import './BaseStatsInput.css';
 
 const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
   const racialBaseStats = race.baseStats;
@@ -49,7 +46,7 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
   function clearAllStats() {
     let newStats = { ...baseStats };
     Object.keys(newStats).map((stat) => {
-      newStats[stat] = '';
+      newStats[stat] = { value: null };
     });
     setBaseStats(newStats);
   }
@@ -60,11 +57,11 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
         <Heading>Base Stats</Heading>
       </Card.Header>
       <Card.Body>
-        <SimpleGrid columns={[3]} gap={8}>
+        <SimpleGrid columns={{ base: 1, sm: 3 }} gap={8}>
           {Object.keys(baseStats).map((stat) => (
             <GridItem>
-              <Field.Root>
-                <Field.HelperText>
+              <Field
+                label={
                   <Badge
                     key={`${stat}LabelKey`}
                     htmlFor={`${stat}Input`}
@@ -72,26 +69,27 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
                   >
                     {stat}
                   </Badge>
-                </Field.HelperText>
+                }
+              >
                 <Group attached>
-                  <NumberInput.Root
+                  <NumberInputRoot
                     min={racialBaseStats ? racialBaseStats[stat]?.min : 0}
                     max={racialBaseStats ? racialBaseStats[stat]?.max : 100}
-                    value={baseStats[stat].value || ''}
+                    value={baseStats[stat].value}
                     onValueChange={(e) => setBaseStat(stat, e.value)}
                     disabled={race === ''}
                     step={1}
                     id={`${stat}Input`}
                     key={`${stat}InputKey`}
                   >
-                    <NumberInput.Input
+                    <NumberInputField
                       placeholder={
                         racialBaseStats
                           ? `${racialBaseStats[stat].min} - ${racialBaseStats[stat].max}`
                           : ''
                       }
                     />
-                  </NumberInput.Root>
+                  </NumberInputRoot>
                   <IconButton
                     key={`${stat}Generator`}
                     onClick={() => generateStat(stat)}
@@ -100,7 +98,7 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
                     <BsArrowClockwise />
                   </IconButton>
                 </Group>
-              </Field.Root>
+              </Field>
             </GridItem>
           ))}
         </SimpleGrid>

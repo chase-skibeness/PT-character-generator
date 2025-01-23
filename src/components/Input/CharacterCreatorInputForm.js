@@ -4,7 +4,6 @@ import RaceInput from './RaceInput/RaceInput';
 import BaseStatsInput from './BaseStatsInput/BaseStatsInput';
 import GrowthRatesInput from './GrowthRatesInput/GrowthRatesInput';
 import { GridItem, SimpleGrid } from '@chakra-ui/react';
-//import './Input.css';
 
 const CharacterCreatorInputForm = ({ characterInfo }) => {
   const {
@@ -18,21 +17,21 @@ const CharacterCreatorInputForm = ({ characterInfo }) => {
     setGrowthRates,
   } = characterInfo;
   return (
-    <SimpleGrid columns={[4]} gap="25px">
-      <GridItem colSpan={{ base: 2 }}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} gap="4">
+      <GridItem>
         <NameInput name={name} setName={setName} />
       </GridItem>
-      <GridItem colSpan={{ base: 2 }}>
+      <GridItem>
         <RaceInput race={race} setRace={setRace} />
       </GridItem>
-      <GridItem colSpan={{ base: 2 }}>
+      <GridItem>
         <BaseStatsInput
           baseStats={baseStats}
           setBaseStats={setBaseStats}
           race={race}
         />
       </GridItem>
-      <GridItem colSpan={{ base: 2 }}>
+      <GridItem>
         <GrowthRatesInput
           growthRates={growthRates}
           setGrowthRates={setGrowthRates}

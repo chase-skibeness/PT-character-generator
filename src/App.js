@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-//import './App.css';
 import CharacterCreatorInputForm from './components/Input/CharacterCreatorInputForm';
 import CharacterLevelView from './components/View/CharacterLevelView';
-import { Box, Container, Heading, Separator, Stack } from '@chakra-ui/react';
+import { Provider } from './components/ui/provider';
+import { Box, Container, Heading, Stack } from '@chakra-ui/react';
 
 function App() {
   const [name, setName] = useState('');
@@ -42,19 +42,21 @@ function App() {
   };
 
   return (
-    <Container>
-      <Stack gap="16">
-        <Box mt="4">
-          <Heading size="3xl">Project Township Character Generator</Heading>
-        </Box>
-        <CharacterCreatorInputForm characterInfo={characterInfo} />
-        <CharacterLevelView
-          name={name}
-          baseStats={baseStats}
-          growthRates={growthRates}
-        />
-      </Stack>
-    </Container>
+    <Provider>
+      <Container>
+        <Stack gap="8">
+          <Box mt="4">
+            <Heading size="3xl">Project Township Character Generator</Heading>
+          </Box>
+          <CharacterCreatorInputForm characterInfo={characterInfo} />
+          <CharacterLevelView
+            name={name}
+            baseStats={baseStats}
+            growthRates={growthRates}
+          />
+        </Stack>
+      </Container>
+    </Provider>
   );
 }
 

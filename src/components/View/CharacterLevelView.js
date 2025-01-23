@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classesData from '../../data/classes.json';
-import LevelView from './LevelView/LevelView';
-import './View.css';
-import LevelControls from './LevelControls/LevelControls';
+import LevelsView from './LevelView/LevelsView';
+import { Card, Heading } from '@chakra-ui/react';
 
 const classes = classesData.classes;
 
@@ -48,7 +47,7 @@ const CharacterLevelView = ({ name, baseStats, growthRates }) => {
       const prevClass = lastLevelEntry.classDef;
       const prevStats = lastLevelEntry.stats;
       newLevelList.push({
-        classDef: classes[selectedClass],
+        classDef: selectedClass,
         level: newLevel,
         stats: calculateStats(newLevel, prevClass, prevStats),
       });
@@ -81,26 +80,22 @@ const CharacterLevelView = ({ name, baseStats, growthRates }) => {
   }
 
   return (
-    <div className="character-view-container">
-      <div className="character-view-header">
-        <h3>{name || ''}</h3>
-      </div>
-      {levelList.length > 0 ? (
-        <div className="character-view-levels-container">
-          {levelList.map((characterAtLevel) => (
-            <LevelView
-              key={`${name}${characterAtLevel.level}key`}
-              level={characterAtLevel.level}
-              classDef={characterAtLevel.classDef}
-              stats={characterAtLevel.stats}
-            />
-          ))}
-        </div>
-      ) : (
-        <br></br>
-      )}
-      <LevelControls levelList={levelList} addLevel={addLevel} />
-    </div>
+    <Card.Root>
+      <Card.Header>
+        <Heading>
+          {name
+            ? `${name} - Level ${levelList.findLast(() => true).level} ${levelList.findLast(() => true).classDef.name}`
+            : ''}
+        </Heading>
+      </Card.Header>
+      <Card.Body>
+        <LevelsView levelList={levelList} addLevel={addLevel} />
+      </Card.Body>
+      <Card.Footer>
+        <br />
+        <br />
+      </Card.Footer>
+    </Card.Root>
   );
 };
 

@@ -2,18 +2,23 @@ import {
   Group,
   Card,
   Heading,
-  Button,
   SimpleGrid,
   GridItem,
-  Field,
   Badge,
   IconButton,
   createListCollection,
-  Select,
 } from '@chakra-ui/react';
-import { BsArrowClockwise, BsFillInfoSquareFill } from 'react-icons/bs';
+import { Button } from '../../ui/button';
+import { Field } from '../../ui/field';
+import {
+  SelectRoot,
+  SelectTrigger,
+  SelectContent,
+  SelectValueText,
+  SelectItem,
+} from '../../ui/select';
+import { BsArrowClockwise } from 'react-icons/bs';
 import React from 'react';
-//import './GrowthRatesInput.css';
 
 const GROWTH_RATES = {
   Minimal: {
@@ -33,21 +38,21 @@ const GROWTH_RATES = {
   Normal: {
     name: 'Normal',
     code: '_',
-    probability: 0.5,
+    probability: 0.4,
     description: '+1 every level',
     calcGrowth: () => 1,
   },
   Gradual: {
     name: 'Gradual',
     code: '+',
-    probability: 0.1,
+    probability: 0.2,
     description: '+1 every level, bonus +1 every 3 levels',
     calcGrowth: (level) => (level % 3 == 0 ? 2 : 1),
   },
   Accelerated: {
     name: 'Accelerated',
     code: '++',
-    probability: 0.2,
+    probability: 0.1,
     description: '+1 every level, bonus +1 every 2 levels',
     calcGrowth: (level) => (level % 2 === 0 ? 2 : 1),
   },
@@ -116,11 +121,11 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
         <Heading>Natural Growth Rates</Heading>
       </Card.Header>
       <Card.Body>
-        <SimpleGrid columns={[3]} gap={8}>
+        <SimpleGrid columns={{ base: 1, sm: 3 }} gap={8}>
           {Object.keys(growthRates).map((statName) => (
             <GridItem>
-              <Field.Root>
-                <Field.HelperText>
+              <Field
+                label={
                   <Badge
                     key={`${statName}InputLabelKey`}
                     htmlFor={`${statName}Input`}
@@ -128,31 +133,33 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
                   >
                     {statName}
                   </Badge>
-                </Field.HelperText>
+                }
+              >
                 <Group attached>
-                  <Select.Root
+                  <SelectRoot
+                    key={`${statName}SelectKey`}
                     collection={growthRateCollection}
                     value={[growthRates[statName]?.name]}
                     onValueChange={(e) => {
                       setGrowthRate(statName, GROWTH_RATES[e.value[0]]);
                     }}
                     positioning={{ strategy: 'fixed' }}
-                    minWidth="125px"
+                    minW={'125px'}
                   >
-                    <Select.Trigger>
-                      <Select.ValueText placeholder="Growth Rate" />
-                    </Select.Trigger>
-                    <Select.Content>
+                    <SelectTrigger>
+                      <SelectValueText placeholder="Growth Rate" />
+                    </SelectTrigger>
+                    <SelectContent>
                       {growthRateCollection.items.map((growthRateOption) => (
-                        <Select.Item
+                        <SelectItem
                           item={growthRateOption}
                           key={growthRateOption.value}
                         >
                           {growthRateOption.label}
-                        </Select.Item>
+                        </SelectItem>
                       ))}
-                    </Select.Content>
-                  </Select.Root>
+                    </SelectContent>
+                  </SelectRoot>
                   <IconButton
                     key={`${statName}Generator`}
                     onClick={() => generateGrowthRate(statName)}
@@ -160,7 +167,7 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
                     <BsArrowClockwise />
                   </IconButton>
                 </Group>
-              </Field.Root>
+              </Field>
             </GridItem>
           ))}
         </SimpleGrid>
@@ -180,24 +187,3 @@ const GrowthRatesInput = ({ growthRates, setGrowthRates }) => {
 };
 
 export default GrowthRatesInput;
-
-// Object.keys(GROWTH_RATES).map((growthRateName) => (
-//   <div
-//     key={`${GROWTH_RATES[growthRateName].name}: ${GROWTH_RATES[growthRateName].description}Key`}
-//   >
-//     <strong>{`${GROWTH_RATES[growthRateName].code}:`}</strong>
-//     <p>{` ${GROWTH_RATES[growthRateName].description}`}</p>
-//   </div>
-// ));
-
-// <select
-//   onChange={(e) => setGrowthRate(statName, GROWTH_RATES[e.target.value])}
-//   value={growthRates[statName]?.name || ''}
-// >
-//   <option value="">--Choose Growth Rate--</option>
-//   {Object.keys(GROWTH_RATES).map((growthRateName) => (
-//     <option key={`growthRateOption${growthRateName}`} value={growthRateName}>
-//       {GROWTH_RATES[growthRateName].code}
-//     </option>
-//   ))}
-// </select>;

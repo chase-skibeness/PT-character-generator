@@ -3,7 +3,7 @@ import React from 'react';
 
 const NameInput = ({ name, setName }) => {
   return (
-    <Card.Root>
+    <Card.Root minH="188px">
       <Card.Header>
         <Heading>Character Name</Heading>
       </Card.Header>

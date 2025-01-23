@@ -4,13 +4,18 @@ import {
   Card,
   createListCollection,
   Heading,
-  SelectContent,
-  SelectItem,
-  SelectLabel,
+  Group,
+  IconButton,
+  Text,
+} from '@chakra-ui/react';
+import {
   SelectRoot,
   SelectTrigger,
+  SelectContent,
   SelectValueText,
-} from '@chakra-ui/react';
+  SelectItem,
+} from '../../ui/select';
+import { BsArrowClockwise } from 'react-icons/bs';
 
 const races = racesData.races;
 
@@ -21,33 +26,46 @@ const raceCollection = createListCollection({
 });
 
 const RaceInput = ({ race, setRace }) => {
+  function generateRandomRace() {
+    const raceKeys = Object.keys(races);
+    const randomIndex = Math.floor(Math.random() * raceKeys.length);
+    setRace(races[raceKeys[randomIndex]]);
+  }
+
   return (
-    <Card.Root maxH="142px">
+    <Card.Root minH="188px">
       <Card.Header>
         <Heading>Select a Race</Heading>
       </Card.Header>
       <Card.Body>
-        <SelectRoot
-          collection={raceCollection}
-          value={[race.name]}
-          onValueChange={(e) => {
-            setRace(races[e.value[0]]);
-          }}
-          positioning={{ strategy: 'fixed' }}
-        >
-          <SelectLabel>{race.description}</SelectLabel>
-          <SelectTrigger>
-            <SelectValueText placeholder="--Choose Race--" />
-          </SelectTrigger>
-          <SelectContent>
-            {raceCollection.items.map((raceOption) => (
-              <SelectItem item={raceOption} key={raceOption.value}>
-                {raceOption.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </SelectRoot>
+        <Group attached>
+          <SelectRoot
+            collection={raceCollection}
+            value={[race.name]}
+            onValueChange={(e) => {
+              setRace(races[e.value[0]]);
+            }}
+            positioning={{ strategy: 'fixed' }}
+          >
+            <SelectTrigger>
+              <SelectValueText placeholder="--Choose Race--" />
+            </SelectTrigger>
+            <SelectContent>
+              {raceCollection.items.map((raceOption) => (
+                <SelectItem item={raceOption} key={raceOption.value}>
+                  {raceOption.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </SelectRoot>
+          <IconButton onClick={generateRandomRace}>
+            <BsArrowClockwise />
+          </IconButton>
+        </Group>
       </Card.Body>
+      <Card.Footer>
+        <Text textStyle={'sm'}>{race.description}</Text>
+      </Card.Footer>
     </Card.Root>
   );
 };
