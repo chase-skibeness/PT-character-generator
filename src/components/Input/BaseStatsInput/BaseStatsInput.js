@@ -1,5 +1,17 @@
+import {
+  Badge,
+  Card,
+  Group,
+  Heading,
+  SimpleGrid,
+  GridItem,
+  IconButton,
+} from '@chakra-ui/react';
+import { Button } from '../../ui/button';
+import { NumberInputField, NumberInputRoot } from '../../ui/number-input';
+import { Field } from '../../ui/field';
 import React from 'react';
-import './BaseStatsInput.css';
+import { BsArrowClockwise } from 'react-icons/bs';
 
 const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
   const racialBaseStats = race.baseStats;
@@ -34,52 +46,74 @@ const BaseStatsInput = ({ baseStats, setBaseStats, race }) => {
   function clearAllStats() {
     let newStats = { ...baseStats };
     Object.keys(newStats).map((stat) => {
-      newStats[stat] = '';
+      newStats[stat] = { value: null };
     });
     setBaseStats(newStats);
   }
 
   return (
-    <div className="base-stats-container">
-      <div className="base-stats-controls">
-        <h2>Base Stats</h2>
-        <button onClick={generateAllStats} disabled={race === ''}>
-          Generate All
-        </button>
-        <button onClick={clearAllStats}>Clear</button>
-      </div>
-      <div className="base-stats-fields">
-        {Object.keys(baseStats).map((stat) => (
-          <div key={`${stat}InputContainerKey`}>
-            <label key={`${stat}LabelKey`} htmlFor={`${stat}Input`}>
-              {stat}
-            </label>
-            <input
-              id={`${stat}Input`}
-              key={`${stat}InputKey`}
-              type="number"
-              min={racialBaseStats ? racialBaseStats[stat]?.min : 0}
-              max={racialBaseStats ? racialBaseStats[stat]?.max : 0}
-              value={baseStats[stat].value || ''}
-              onChange={(e) => setBaseStat(stat, e.target.value)}
-              placeholder={
-                racialBaseStats
-                  ? `${racialBaseStats[stat].min} - ${racialBaseStats[stat].max}`
-                  : ''
-              }
-              disabled={race === ''}
-            />
-            <button
-              key={`${stat}Generator`}
-              onClick={() => generateStat(stat)}
-              disabled={race === ''}
-            >
-              Generate
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Card.Root>
+      <Card.Header>
+        <Heading>Base Stats</Heading>
+      </Card.Header>
+      <Card.Body>
+        <SimpleGrid columns={{ base: 1, sm: 3 }} gap={8}>
+          {Object.keys(baseStats).map((stat) => (
+            <GridItem>
+              <Field
+                label={
+                  <Badge
+                    key={`${stat}LabelKey`}
+                    htmlFor={`${stat}Input`}
+                    variant="surface"
+                  >
+                    {stat}
+                  </Badge>
+                }
+              >
+                <Group attached>
+                  <NumberInputRoot
+                    min={racialBaseStats ? racialBaseStats[stat]?.min : 0}
+                    max={racialBaseStats ? racialBaseStats[stat]?.max : 100}
+                    value={baseStats[stat].value}
+                    onValueChange={(e) => setBaseStat(stat, e.value)}
+                    disabled={race === ''}
+                    step={1}
+                    id={`${stat}Input`}
+                    key={`${stat}InputKey`}
+                  >
+                    <NumberInputField
+                      placeholder={
+                        racialBaseStats
+                          ? `${racialBaseStats[stat].min} - ${racialBaseStats[stat].max}`
+                          : ''
+                      }
+                    />
+                  </NumberInputRoot>
+                  <IconButton
+                    key={`${stat}Generator`}
+                    onClick={() => generateStat(stat)}
+                    disabled={race === ''}
+                  >
+                    <BsArrowClockwise />
+                  </IconButton>
+                </Group>
+              </Field>
+            </GridItem>
+          ))}
+        </SimpleGrid>
+      </Card.Body>
+      <Card.Footer justifyContent="flex-end">
+        <Group>
+          <Button onClick={generateAllStats} disabled={race === ''} size="sm">
+            <BsArrowClockwise /> All
+          </Button>
+          <Button onClick={clearAllStats} size="sm">
+            Clear
+          </Button>
+        </Group>
+      </Card.Footer>
+    </Card.Root>
   );
 };
 

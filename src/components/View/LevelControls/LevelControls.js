@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classesData from '../../../data/classes.json';
-import './LevelControls.css';
+import { Group, IconButton, createListCollection } from '@chakra-ui/react';
+import {
+  SelectRoot,
+  SelectTrigger,
+  SelectContent,
+  SelectValueText,
+  SelectItem,
+} from '../../ui/select';
+import { NumberInputField, NumberInputRoot } from '../../ui/number-input';
+import { BsPlusCircle } from 'react-icons/bs';
 
 const classes = classesData.classes;
 
+const classCollection = createListCollection({
+  items: Object.keys(classes).map((classKey) => {
+    let c = classes[classKey];
+    return { label: c.name, value: classKey };
+  }),
+});
+
 const LevelControls = ({ levelList, addLevel }) => {
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [levelsToAdd, setLevelsToAdd] = useState(null);
+  const [selectedClass, setSelectedClass] = useState([]);
+  const [levelsToAdd, setLevelsToAdd] = useState(1);
 
   function isEligibleForClass({ name, requirements }) {
     const characterAtLevel = levelList.findLast(() => true);
@@ -19,42 +35,49 @@ const LevelControls = ({ levelList, addLevel }) => {
     );
   }
 
-  function generateClassOptions() {
-    let optionList = [];
-    for (const [className, classDef] of Object.entries(classes)) {
-      if (isEligibleForClass(classDef))
-        optionList.push(
-          <option key={`${className}optionkey`} value={className}>
-            {classDef.name}
-          </option>
-        );
-    }
-    return optionList;
-  }
-
   return (
-    <div className="character-view-levels-controls">
-      <select
-        onChange={(e) => setSelectedClass(e.target.value || '')}
-        value={selectedClass?.name}
+    <Group>
+      <SelectRoot
+        collection={classCollection}
+        value={selectedClass}
+        onValueChange={(e) => {
+          setSelectedClass(e.value);
+        }}
+        positioning={{ strategy: 'fixed' }}
       >
-        <option value="">--Choose Class--</option>
-        {generateClassOptions()}
-      </select>
-      <input
-        type="number"
+        <SelectTrigger>
+          <SelectValueText placeholder="--Choose Class--" />
+        </SelectTrigger>
+        <SelectContent>
+          {classCollection.items.map((classOption) => {
+            if (isEligibleForClass(classes[classOption?.value]))
+              return (
+                <SelectItem
+                  item={classOption}
+                  key={classOption?.value + Math.random()}
+                >
+                  {classOption?.label}
+                </SelectItem>
+              );
+          })}
+        </SelectContent>
+      </SelectRoot>
+      <NumberInputRoot
         min={1}
-        defaultValue={1}
-        placeholder="1"
-        onChange={(e) => setLevelsToAdd(parseInt(e.target.value))}
-      />
-      <button
-        onClick={() => addLevel(levelsToAdd, selectedClass)}
+        value={levelsToAdd}
+        onValueChange={(e) => setLevelsToAdd(parseInt(e.value))}
+        defaultValue="1"
+        step={1}
+      >
+        <NumberInputField />
+      </NumberInputRoot>
+      <IconButton
+        onClick={() => addLevel(levelsToAdd, classes[selectedClass])}
         disabled={!selectedClass}
       >
-        Add Level
-      </button>
-    </div>
+        <BsPlusCircle />
+      </IconButton>
+    </Group>
   );
 };
 

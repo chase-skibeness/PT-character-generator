@@ -107,7 +107,7 @@
     },
     "Reptilekin": {
       "name": "Reptilekin",
-      "description": "Calculated and resilient, Reptilekin balance endurance and defense while maintaining sharp focus in battle.",
+      "description": "Reptilekin balance endurance and defense while maintaining sharp focus in battle.",
       "baseStats": {
         "STR": { "min": 8, "max": 12 },
         "END": { "min": 6, "max": 10 },
