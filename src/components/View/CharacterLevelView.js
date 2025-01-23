@@ -23,8 +23,9 @@ const CharacterLevelView = ({ name, baseStats, growthRates }) => {
       if (!classMod) classMod = 0;
 
       const growth =
-        growthRates[statName]?.calcGrowth(level) * (1 + classMod) +
-        stats[statName].overflow;
+        (growthRates[statName]?.calcGrowth(level) + stats[statName].overflow) *
+        (1 + classMod);
+
       const overflow = growth % 1;
       return {
         value: Math.floor(stats[statName].value + growth),

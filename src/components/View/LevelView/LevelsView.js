@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '@chakra-ui/react';
+import { Table, Highlight } from '@chakra-ui/react';
 import LevelControls from '../LevelControls/LevelControls';
 import { ActionBarRoot, ActionBarContent } from '../../ui/action-bar';
 
@@ -16,6 +16,29 @@ const statList = [
 ];
 
 const LevelsView = ({ levelList, addLevel, growthRates }) => {
+  function getStatColor(characterAtLevel, checkedStat) {
+    if (characterAtLevel) {
+      const modifier = characterAtLevel.classDef.modifiers[checkedStat];
+      if (modifier) {
+        switch (true) {
+          case modifier > 0.4:
+            return { color: 'green.600', fontWeight: 'bold' };
+          case modifier > 0.25:
+            return { color: 'green.600' };
+          case modifier > 0.1:
+            return { color: 'green.400' };
+          case modifier > 0:
+            return { color: 'green.200' };
+          case modifier < 0:
+            return { color: 'red.500' };
+          default:
+            return '';
+        }
+      }
+    }
+    return '';
+  }
+
   return (
     <>
       <Table.Root stickyHeader striped>
@@ -40,7 +63,12 @@ const LevelsView = ({ levelList, addLevel, growthRates }) => {
                   key={`${characterAtLevel.level}${stat}Cellkey`}
                   textAlign={'center'}
                 >
-                  {characterAtLevel.stats[stat].value}
+                  <Highlight
+                    query={`${characterAtLevel.stats[stat].value}`}
+                    styles={getStatColor(characterAtLevel, stat)}
+                  >
+                    {`${characterAtLevel.stats[stat].value || ''}`}
+                  </Highlight>
                 </Table.Cell>
               ))}
             </Table.Row>
