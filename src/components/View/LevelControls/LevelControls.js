@@ -27,11 +27,18 @@ const LevelControls = ({ levelList, addLevel }) => {
   function isEligibleForClass({ name, requirements }) {
     const characterAtLevel = levelList.findLast(() => true);
 
-    if (!requirements || name === characterAtLevel.classDef.name) return true;
+    if (!requirements || name === characterAtLevel.classDef?.name) return true;
 
     return (
       characterAtLevel.level >= requirements.level &&
-      requirements.prerequisites.includes(characterAtLevel.classDef.name)
+      requirements?.prerequisites.includes(characterAtLevel.classDef?.name)
+    );
+  }
+
+  function noStats() {
+    const characterAtLevel = levelList.findLast(() => true);
+    return Object.keys(characterAtLevel.stats).includes(
+      (stat) => characterAtLevel.stats[stat].value === null
     );
   }
 
@@ -73,7 +80,7 @@ const LevelControls = ({ levelList, addLevel }) => {
       </NumberInputRoot>
       <IconButton
         onClick={() => addLevel(levelsToAdd, classes[selectedClass])}
-        disabled={!selectedClass}
+        disabled={selectedClass.length === 0 || noStats()}
       >
         <BsPlusCircle />
       </IconButton>
