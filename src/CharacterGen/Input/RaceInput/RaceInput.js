@@ -1,5 +1,5 @@
 import React from 'react';
-import racesData from '../../../data/races.json';
+import racesData from 'data/races.json';
 import {
   Card,
   createListCollection,
@@ -14,7 +14,7 @@ import {
   SelectContent,
   SelectValueText,
   SelectItem,
-} from '../../../ui/select';
+} from 'ui/select';
 import { BsArrowClockwise } from 'react-icons/bs';
 
 const races = racesData.races;

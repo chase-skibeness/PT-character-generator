@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import classesData from '../../data/classes.json';
+import classesData from 'data/classes.json';
 import LevelsView from './LevelView/LevelsView';
 import { Card, Heading } from '@chakra-ui/react';
 

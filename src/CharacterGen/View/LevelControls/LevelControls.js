@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import classesData from '../../../data/classes.json';
+import React, { useState } from 'react';
+import classesData from 'data/classes.json';
 import { Group, IconButton, createListCollection } from '@chakra-ui/react';
 import {
   SelectRoot,
@@ -7,8 +7,8 @@ import {
   SelectContent,
   SelectValueText,
   SelectItem,
-} from '../../../ui/select';
-import { NumberInputField, NumberInputRoot } from '../../../ui/number-input';
+} from 'ui/select';
+import { NumberInputField, NumberInputRoot } from 'ui/number-input';
 import { BsPlusCircle } from 'react-icons/bs';
 
 const classes = classesData.classes;

@@ -1,60 +1,28 @@
-import React, { useState } from 'react';
-import CharacterCreatorInputForm from './components/Input/CharacterCreatorInputForm';
-import CharacterLevelView from './components/View/CharacterLevelView';
-import { Provider } from './ui/provider';
-import { Box, Container, Heading, Stack } from '@chakra-ui/react';
+import React from 'react';
+import CharacterGen from './CharacterGen/CharacterGen';
+import { Provider } from 'ui/provider';
+import { Tabs, Container } from '@chakra-ui/react';
+import MonsterGen from 'MonsterGen/MonsterGen';
+
+const isLocal = process.env.NODE_ENV === 'development';
 
 function App() {
-  const [name, setName] = useState('');
-  const [race, setRace] = useState('');
-  const [baseStats, setBaseStats] = useState({
-    STR: { value: null, overflow: 0 },
-    END: { value: null, overflow: 0 },
-    DEF: { value: null, overflow: 0 },
-    INT: { value: null, overflow: 0 },
-    SPI: { value: null, overflow: 0 },
-    MDF: { value: null, overflow: 0 },
-    SPD: { value: null, overflow: 0 },
-    LCK: { value: null, overflow: 0 },
-    ACC: { value: null, overflow: 0 },
-  });
-  const [growthRates, setGrowthRates] = useState({
-    STR: null,
-    END: null,
-    DEF: null,
-    INT: null,
-    SPI: null,
-    MDF: null,
-    SPD: null,
-    LCK: null,
-    ACC: null,
-  });
-
-  const characterInfo = {
-    name: name,
-    setName: setName,
-    race: race,
-    setRace: setRace,
-    baseStats: baseStats,
-    setBaseStats: setBaseStats,
-    growthRates: growthRates,
-    setGrowthRates: setGrowthRates,
-  };
-
   return (
     <Provider>
       <Container>
-        <Stack gap="8">
-          <Box mt="4">
-            <Heading size="3xl">Project Township Character Generator</Heading>
-          </Box>
-          <CharacterCreatorInputForm characterInfo={characterInfo} />
-          <CharacterLevelView
-            name={name}
-            baseStats={baseStats}
-            growthRates={growthRates}
-          />
-        </Stack>
+        <Tabs.Root lazyMount unmountOnExit defaultValue="tab-1">
+          <Tabs.List>
+            <Tabs.Trigger value="tab-1">Character Generator</Tabs.Trigger>
+            <Tabs.Trigger value="tab-2">Monster Creation Tool</Tabs.Trigger>
+            <Tabs.Trigger value="tab-3">Ability Creation Tool</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab-1">
+            <CharacterGen />
+          </Tabs.Content>
+          <Tabs.Content value="tab-2">
+            <MonsterGen isLocal={isLocal} />
+          </Tabs.Content>
+        </Tabs.Root>
       </Container>
     </Provider>
   );

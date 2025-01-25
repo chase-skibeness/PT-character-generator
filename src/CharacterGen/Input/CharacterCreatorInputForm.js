@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import NameInput from './NameInput/NameInput';
 import RaceInput from './RaceInput/RaceInput';
 import BaseStatsInput from './BaseStatsInput/BaseStatsInput';
