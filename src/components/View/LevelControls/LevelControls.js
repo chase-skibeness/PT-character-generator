@@ -7,8 +7,8 @@ import {
   SelectContent,
   SelectValueText,
   SelectItem,
-} from '../../ui/select';
-import { NumberInputField, NumberInputRoot } from '../../ui/number-input';
+} from '../../../ui/select';
+import { NumberInputField, NumberInputRoot } from '../../../ui/number-input';
 import { BsPlusCircle } from 'react-icons/bs';
 
 const classes = classesData.classes;

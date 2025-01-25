@@ -1,6 +1,6 @@
 {
-  "name": "PT-character-generator",
-  "homepage": "https://chase-skibeness.github.io/PT-character-generator",
+  "name": "PT-AdminTool",
+  "homepage": "https://chase-skibeness.github.io/PT-AdminTool",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

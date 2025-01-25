@@ -8,15 +8,15 @@ import {
   IconButton,
   createListCollection,
 } from '@chakra-ui/react';
-import { Button } from '../../ui/button';
-import { Field } from '../../ui/field';
+import { Button } from '../../../ui/button';
+import { Field } from '../../../ui/field';
 import {
   SelectRoot,
   SelectTrigger,
   SelectContent,
   SelectValueText,
   SelectItem,
-} from '../../ui/select';
+} from '../../../ui/select';
 import { BsArrowClockwise } from 'react-icons/bs';
 import React from 'react';
 

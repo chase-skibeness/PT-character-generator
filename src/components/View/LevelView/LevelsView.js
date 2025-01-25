@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Highlight } from '@chakra-ui/react';
 import LevelControls from '../LevelControls/LevelControls';
-import { ActionBarRoot, ActionBarContent } from '../../ui/action-bar';
+import { ActionBarRoot, ActionBarContent } from '../../../ui/action-bar';
 
 const statList = [
   'STR',

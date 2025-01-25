@@ -7,9 +7,9 @@ import {
   GridItem,
   IconButton,
 } from '@chakra-ui/react';
-import { Button } from '../../ui/button';
-import { NumberInputField, NumberInputRoot } from '../../ui/number-input';
-import { Field } from '../../ui/field';
+import { Button } from '../../../ui/button';
+import { NumberInputField, NumberInputRoot } from '../../../ui/number-input';
+import { Field } from '../../../ui/field';
 import React from 'react';
 import { BsArrowClockwise } from 'react-icons/bs';
 

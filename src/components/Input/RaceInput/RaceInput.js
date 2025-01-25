@@ -14,7 +14,7 @@ import {
   SelectContent,
   SelectValueText,
   SelectItem,
-} from '../../ui/select';
+} from '../../../ui/select';
 import { BsArrowClockwise } from 'react-icons/bs';
 
 const races = racesData.races;

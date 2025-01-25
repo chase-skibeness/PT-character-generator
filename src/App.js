@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CharacterCreatorInputForm from './components/Input/CharacterCreatorInputForm';
 import CharacterLevelView from './components/View/CharacterLevelView';
-import { Provider } from './components/ui/provider';
+import { Provider } from './ui/provider';
 import { Box, Container, Heading, Stack } from '@chakra-ui/react';
 
 function App() {
